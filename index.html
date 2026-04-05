@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Personalized First Mother's Day Storybook</title>
+    <meta name="description" content="Give her a personalized digital storybook for her first Mother's Day. An intimate, instant-delivery gift that says what you might be struggling to put into words.">
+    
+    <!-- Google Fonts: Instrument Serif (Headings) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#f8f2eb',
+                        surface: '#fffaf5',
+                        'surface-alt': '#f3e8dd',
+                        text: '#2d211b',
+                        muted: '#6a594f',
+                        cta: '#844b5b',
+                        'cta-hover': '#6f3d4b',
+                        border: '#e8d8de'
+                    },
+                    fontFamily: {
+                        serif: ['"Instrument Serif"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for Details/Summary (FAQ) */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        .accordion-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        details[open] .accordion-content {
+            max-height: 500px;
+            opacity: 1;
+        }
+        details[open] .accordion-icon {
+            transform: rotate(45deg);
+        }
+        
+        /* Soft fade-in animation for scroll reveals */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-bg text-text font-sans antialiased leading-relaxed selection:bg-cta selection:text-white">
+
+    <!-- Announcement Bar -->
+    <div class="bg-surface-alt text-center py-2 text-sm font-medium text-text tracking-wide">
+        First Mother’s Day gift • Personalized in minutes
+    </div>
+
+    <!-- Navigation -->
+    <nav class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center relative z-10">
+        <div class="font-serif text-2xl italic tracking-wide text-text">Keepsake Gifts</div>
+        <div class="hidden md:flex gap-6 items-center text-sm font-medium text-muted">
+            <a href="#how-it-works" class="hover:text-text transition-colors">How it works</a>
+            <a href="#faq" class="hover:text-text transition-colors">FAQ</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative max-w-6xl mx-auto px-6 pt-12 pb-24 md:pt-20 md:pb-32 flex flex-col md:flex-row items-center gap-12 md:gap-20">
+        <div class="md:w-1/2 flex flex-col items-start" id="hero-content">
+            <span class="text-xs font-bold tracking-widest uppercase text-muted mb-4">First Mother's Day Gift</span>
+            <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-text mb-6">
+                A personalized storybook that says what you're <span class="italic text-cta">struggling to put into words.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-muted mb-8 max-w-lg leading-relaxed font-light">
+                Made for the partner who wants to give something deeply personal, without waiting on shipping or settling for a generic card.
+            </p>
+            
+            <ul class="space-y-2 mb-8 text-sm font-medium text-text">
+                <li class="flex items-center gap-2"><span class="text-cta text-lg">✓</span> Instant digital delivery (no shipping delays)</li>
+                <li class="flex items-center gap-2"><span class="text-cta text-lg">✓</span> Personalized online in minutes</li>
+                <li class="flex items-center gap-2"><span class="text-cta text-lg">✓</span> A meaningful keepsake she'll actually keep</li>
+            </ul>
+            
+            <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-6">
+                <a href="https://buy.polar.sh/polar_cl_Ob2MEwUQKkheQfh6FFPH5dkWKBojWvbaKS6wy1UaY9T" class="w-full sm:w-auto bg-cta hover:bg-cta-hover text-white px-8 py-4 rounded-full text-base font-medium transition-all shadow-lg hover:shadow-xl text-center transform hover:-translate-y-0.5">
+                    Personalize Her Storybook
+                </a>
+                <a href="#preview" class="w-full sm:w-auto bg-transparent border border-border hover:bg-surface-alt text-text px-8 py-4 rounded-full text-base font-medium transition-all text-center">
+                    Preview Sample
+                </a>
+            </div>
+            
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-2 text-sm font-medium text-text">
+                    <span class="text-lg">✨</span> <span class="text-cta font-semibold">Just $12.99</span>
+                </div>
+                <p class="text-sm text-muted max-w-md mt-2">
+                    She opens it as a beautiful hosted flipbook on her phone or tablet—not a generic PDF lost in her downloads.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Hero Image/Mockup -->
+        <div class="md:w-1/2 relative w-full reveal">
+            <!-- Decorative background shape -->
+            <div class="absolute inset-0 bg-surface-alt rounded-[2.5rem] transform rotate-3 scale-105 -z-10"></div>
+            <!-- Mockup Container (Replace image src with your actual storybook cover) -->
+            <div class="relative bg-surface p-4 rounded-[2rem] shadow-2xl overflow-hidden aspect-[4/3] flex items-center justify-center">
+                <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&q=80&w=1000" alt="Mother and baby soft artistic cover" class="w-full h-full object-cover rounded-xl opacity-90 transition-transform duration-700 hover:scale-105">
+                
+                <!-- Play/Preview Overlay Placeholder -->
+                <div class="absolute inset-0 bg-text/10 flex items-center justify-center rounded-xl pointer-events-none">
+                     <div class="bg-white/90 backdrop-blur-sm text-text px-4 py-2 rounded-full text-sm font-medium shadow-sm flex items-center gap-2">
+                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                         Digital Hosted Flipbook
+                     </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Why This Gift Works -->
+    <section class="bg-surface py-24 px-6 border-y border-border">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <h2 class="font-serif text-4xl md:text-5xl text-text mb-6">It helps you give her something deeper than a card.</h2>
+                <p class="text-lg text-muted font-light">
+                    You noticed what this year asked of her, what she carried, and how much she changed. This gift shows her that, without making you write a novel from scratch.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-bg p-8 rounded-2xl reveal border border-border/50">
+                    <div class="w-10 h-10 bg-surface-alt rounded-full flex items-center justify-center text-xl mb-6">💭</div>
+                    <h3 class="text-xl font-medium text-text mb-3">For You</h3>
+                    <p class="text-muted font-light leading-relaxed">You may not know exactly how to phrase everything she deserves to hear. This gift does the emotional heavy lifting for you, without sounding stiff or generic.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-bg p-8 rounded-2xl reveal border border-border/50" style="transition-delay: 100ms;">
+                    <div class="w-10 h-10 bg-surface-alt rounded-full flex items-center justify-center text-xl mb-6">✨</div>
+                    <h3 class="text-xl font-medium text-text mb-3">For Her</h3>
+                    <p class="text-muted font-light leading-relaxed">She receives something that feels intimate, premium, and chosen for this exact season of life—not another item that could have gone to any mom.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-bg p-8 rounded-2xl reveal border border-border/50" style="transition-delay: 200ms;">
+                    <div class="w-10 h-10 bg-surface-alt rounded-full flex items-center justify-center text-xl mb-6">⏱️</div>
+                    <h3 class="text-xl font-medium text-text mb-3">For The Moment</h3>
+                    <p class="text-muted font-light leading-relaxed">It is easy to buy, easy to personalize, and delivered instantly. Perfect for when you're close to the day but still want to give a gift that takes her breath away.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What She Receives -->
+    <section class="py-24 px-6 max-w-6xl mx-auto overflow-hidden">
+        <div class="flex flex-col md:flex-row-reverse items-center gap-16">
+            <div class="md:w-1/2 reveal">
+                <span class="text-xs font-bold tracking-widest uppercase text-muted mb-4 block">The Experience</span>
+                <h2 class="font-serif text-4xl md:text-5xl text-text mb-6">A hosted storybook that feels gift-ready the moment she opens it.</h2>
+                <p class="text-lg text-muted mb-8 font-light">
+                    This is presented as a beautiful online flipbook. It feels closer to opening a high-end keepsake than clicking a standard link.
+                </p>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-start gap-3 text-text">
+                        <span class="text-cta mt-1">✓</span>
+                        <span class="font-light">Personalized with your names and a short dedication message.</span>
+                    </li>
+                    <li class="flex items-start gap-3 text-text">
+                        <span class="text-cta mt-1">✓</span>
+                        <span class="font-light">Viewed beautifully on phone, tablet, or laptop browsers.</span>
+                    </li>
+                    <li class="flex items-start gap-3 text-text">
+                        <span class="text-cta mt-1">✓</span>
+                        <span class="font-light">Private hosted access, with optional password protection.</span>
+                    </li>
+                    <li class="flex items-start gap-3 text-text">
+                        <span class="text-cta mt-1">✓</span>
+                        <span class="font-light">Delivered digitally so you can gift it the same day you buy it.</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="md:w-1/2 relative reveal">
+                <!-- Phone Mockup Container -->
+                <div class="relative max-w-[300px] mx-auto">
+                    <div class="absolute inset-0 bg-surface-alt rounded-[3rem] transform -rotate-3 scale-105 -z-10"></div>
+                    <div class="bg-white border-8 border-white shadow-2xl rounded-[2.5rem] overflow-hidden aspect-[9/19] relative">
+                         <!-- Replace with your actual interior spread mobile view -->
+                        <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=600" alt="Storybook interior spread" class="w-full h-full object-cover opacity-90">
+                        <div class="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-6 inset-x-0 text-center text-white/90 text-sm font-medium tracking-wide">Swipe to turn page ➔</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="bg-surface-alt py-24 px-6 border-y border-border">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <h2 class="font-serif text-4xl md:text-5xl text-text mb-16">Three simple steps, no guesswork.</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- Connecting line on desktop -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-border/80 -z-10 transform -translate-y-1/2"></div>
+                
+                <div class="bg-surface p-8 rounded-2xl shadow-sm border border-border/30 relative">
+                    <div class="w-12 h-12 bg-cta text-white rounded-full flex items-center justify-center font-serif text-2xl mx-auto mb-6 relative z-10 shadow-md">1</div>
+                    <h3 class="text-xl font-medium text-text mb-3">Purchase</h3>
+                    <p class="text-muted font-light text-sm">Complete the secure $12.99 checkout in under a minute via our fast payment portal.</p>
+                </div>
+                
+                <div class="bg-surface p-8 rounded-2xl shadow-sm border border-border/30 relative">
+                    <div class="w-12 h-12 bg-cta text-white rounded-full flex items-center justify-center font-serif text-2xl mx-auto mb-6 relative z-10 shadow-md">2</div>
+                    <h3 class="text-xl font-medium text-text mb-3">Personalize</h3>
+                    <p class="text-muted font-light text-sm">You'll be instantly redirected to a simple form to add her name, the baby's name, and your message.</p>
+                </div>
+                
+                <div class="bg-surface p-8 rounded-2xl shadow-sm border border-border/30 relative">
+                    <div class="w-12 h-12 bg-cta text-white rounded-full flex items-center justify-center font-serif text-2xl mx-auto mb-6 relative z-10 shadow-md">3</div>
+                    <h3 class="text-xl font-medium text-text mb-3">Send Instantly</h3>
+                    <p class="text-muted font-light text-sm">Share the private hosted storybook link via text or email when you are ready to gift.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16">
+                <a href="https://buy.polar.sh/polar_cl_Ob2MEwUQKkheQfh6FFPH5dkWKBojWvbaKS6wy1UaY9T" class="inline-block bg-cta hover:bg-cta-hover text-white px-10 py-4 rounded-full text-base font-medium transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    Start Her Gift Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof (Placeholders) -->
+    <section class="py-24 px-6 max-w-6xl mx-auto text-center">
+        <span class="text-xs font-bold tracking-widest uppercase text-muted mb-4 block">What Husbands Are Saying</span>
+        <h2 class="font-serif text-4xl text-text mb-16 reveal">The reaction you're hoping for.</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Review 1 -->
+            <div class="bg-surface p-8 rounded-2xl text-left border border-border reveal">
+                <div class="flex text-cta mb-4">★★★★★</div>
+                <p class="text-text italic font-serif text-xl mb-4 leading-relaxed">"I wanted something more personal than flowers, and this felt genuinely emotional. She teared up by the third page."</p>
+                <div class="text-sm font-medium text-muted">— Mark T.</div>
+            </div>
+            <!-- Review 2 -->
+            <div class="bg-surface p-8 rounded-2xl text-left border border-border reveal" style="transition-delay: 100ms;">
+                <div class="flex text-cta mb-4">★★★★★</div>
+                <p class="text-text italic font-serif text-xl mb-4 leading-relaxed">"Saved me. I ordered it on Sunday morning, texted her the link while she was nursing, and it looked like I spent weeks planning it."</p>
+                <div class="text-sm font-medium text-muted">— James R.</div>
+            </div>
+            <!-- Review 3 -->
+            <div class="bg-surface p-8 rounded-2xl text-left border border-border reveal" style="transition-delay: 200ms;">
+                <div class="flex text-cta mb-4">★★★★★</div>
+                <p class="text-text italic font-serif text-xl mb-4 leading-relaxed">"It feels premium. Not cheesy, just incredibly thoughtful. Reading it on the phone felt very natural and intimate."</p>
+                <div class="text-sm font-medium text-muted">— David L.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="bg-surface py-24 px-6 border-t border-border">
+        <div class="max-w-3xl mx-auto reveal">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl text-text mb-4">Questions husbands usually have</h2>
+                <p class="text-muted font-light">We've made this gifting process completely frictionless.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <details class="bg-bg border border-border rounded-xl group" open>
+                    <summary class="flex justify-between items-center cursor-pointer p-6 font-medium text-text select-none">
+                        How does she actually receive it?
+                        <span class="accordion-icon text-muted text-2xl transition-transform duration-300 group-open:rotate-45">+</span>
+                    </summary>
+                    <div class="accordion-content px-6 pb-6 text-muted font-light leading-relaxed">
+                        It's not a generic file download. You will receive a private, beautifully hosted web link. You can text or email this link to her whenever you are ready. When she taps it, it opens directly on her device as a full-screen, page-turning storybook.
+                    </div>
+                </details>
+                
+                <!-- FAQ Item 2 -->
+                <details class="bg-bg border border-border rounded-xl group">
+                    <summary class="flex justify-between items-center cursor-pointer p-6 font-medium text-text select-none">
+                        Does this work as a last-minute gift?
+                        <span class="accordion-icon text-muted text-2xl transition-transform duration-300 group-open:rotate-45">+</span>
+                    </summary>
+                    <div class="accordion-content px-6 pb-6 text-muted font-light leading-relaxed">
+                        Yes, perfectly. Because delivery is purely digital and instant after personalization, you can buy it and send it on the exact same day. No shipping delays, no "arriving late" apologies.
+                    </div>
+                </details>
+                
+                <!-- FAQ Item 3 -->
+                <details class="bg-bg border border-border rounded-xl group">
+                    <summary class="flex justify-between items-center cursor-pointer p-6 font-medium text-text select-none">
+                        What exactly do I need to personalize?
+                        <span class="accordion-icon text-muted text-2xl transition-transform duration-300 group-open:rotate-45">+</span>
+                    </summary>
+                    <div class="accordion-content px-6 pb-6 text-muted font-light leading-relaxed">
+                        We keep it simple to avoid overwhelming you. You'll enter her name, the baby's name, your name, and there's a spot for a short, custom dedication message at the end of the book. The main story arc is pre-written to resonate perfectly with a first-time mom.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 4 -->
+                <details class="bg-bg border border-border rounded-xl group">
+                    <summary class="flex justify-between items-center cursor-pointer p-6 font-medium text-text select-none">
+                        Can the storybook be password protected?
+                        <span class="accordion-icon text-muted text-2xl transition-transform duration-300 group-open:rotate-45">+</span>
+                    </summary>
+                    <div class="accordion-content px-6 pb-6 text-muted font-light leading-relaxed">
+                        Yes. Because it is hosted privately, you have the option to set a simple PIN or password so that only she can view the story.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 5 -->
+                <details class="bg-bg border border-border rounded-xl group">
+                    <summary class="flex justify-between items-center cursor-pointer p-6 font-medium text-text select-none">
+                        What is your refund policy?
+                        <span class="accordion-icon text-muted text-2xl transition-transform duration-300 group-open:rotate-45">+</span>
+                    </summary>
+                    <div class="accordion-content px-6 pb-6 text-muted font-light leading-relaxed">
+                        Because this is a digital product that is instantly generated with your custom names and details, we cannot offer refunds once the purchase is complete. However, if you make a typo during personalization, just email support and we will happily fix the spelling for you.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-24 px-6 max-w-4xl mx-auto text-center reveal">
+        <span class="text-xs font-bold tracking-widest uppercase text-muted mb-4 block">Before Mother's Day arrives</span>
+        <h2 class="font-serif text-4xl md:text-6xl text-text mb-6">Give her something she will keep opening long after the flowers are gone.</h2>
+        <p class="text-xl text-muted font-light mb-12 max-w-2xl mx-auto">
+            Personal, emotionally right, and incredibly easy to send. Make her first Mother's Day unforgettable in just a few minutes.
+        </p>
+        <a href="https://buy.polar.sh/polar_cl_Ob2MEwUQKkheQfh6FFPH5dkWKBojWvbaKS6wy1UaY9T" class="inline-block bg-cta hover:bg-cta-hover text-white px-12 py-5 rounded-full text-lg font-medium transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+            Personalize Her Gift for $12.99
+        </a>
+        <div class="mt-6 text-sm text-muted font-light">
+            Secure checkout powered by Polar • Instant Digital Delivery
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-alt border-t border-border py-12 px-6 text-center">
+        <div class="font-serif text-2xl italic tracking-wide text-text mb-6">Keepsake Gifts</div>
+        <div class="text-sm text-muted font-light flex flex-col md:flex-row justify-center gap-4 md:gap-8">
+            <span>© 2026 Keepsake Gifts. All rights reserved.</span>
+            <a href="mailto:orchidsplanner@gmail.com" class="hover:text-text transition-colors">Support: orchidsplanner@gmail.com</a>
+        </div>
+    </footer>
+
+    <!-- Sticky Mobile Bottom CTA -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 w-full p-4 bg-surface/95 backdrop-blur-md border-t border-border md:hidden z-50 transform translate-y-full transition-transform duration-300">
+        <a href="https://buy.polar.sh/polar_cl_Ob2MEwUQKkheQfh6FFPH5dkWKBojWvbaKS6wy1UaY9T" class="block w-full bg-cta hover:bg-cta-hover text-white text-center px-6 py-3.5 rounded-full font-medium shadow-lg text-sm">
+            Personalize Her Gift — $12.99
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Sticky Mobile CTA Logic
+        const stickyCta = document.getElementById('sticky-cta');
+        const heroSection = document.getElementById('hero-content');
+
+        const stickyCallback = (entries) => {
+            entries.forEach(entry => {
+                // If hero content is NOT intersecting (visible), show the sticky CTA
+                if (!entry.isIntersecting) {
+                    stickyCta.classList.remove('translate-y-full');
+                } else {
+                    stickyCta.classList.add('translate-y-full');
+                }
+            });
+        };
+
+        const stickyObserver = new IntersectionObserver(stickyCallback, {
+            threshold: 0
+        });
+
+        if (heroSection && stickyCta) {
+            stickyObserver.observe(heroSection);
+        }
+        
+        // FAQ Accordion custom behavior (prevent multiple open at once - optional)
+        const detailsElements = document.querySelectorAll('details');
+        detailsElements.forEach(targetDetail => {
+            targetDetail.addEventListener('click', () => {
+                detailsElements.forEach(detail => {
+                    if (detail !== targetDetail) {
+                        detail.removeAttribute('open');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
