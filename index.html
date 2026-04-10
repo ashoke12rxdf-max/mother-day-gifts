@@ -431,24 +431,44 @@
         // Sticky Mobile CTA Logic
         const stickyCta = document.getElementById('sticky-cta');
         const heroSection = document.getElementById('hero-content');
+        const checkoutSection = document.getElementById('checkout');
+        let heroOutOfView = false;
+        let checkoutInView = false;
 
-        const stickyCallback = (entries) => {
-            entries.forEach(entry => {
-                // If hero content is NOT intersecting (visible), show the sticky CTA
-                if (!entry.isIntersecting) {
-                    stickyCta.classList.remove('translate-y-full');
-                } else {
-                    stickyCta.classList.add('translate-y-full');
-                }
-            });
+        const updateStickyCtaVisibility = () => {
+            if (!stickyCta) {
+                return;
+            }
+
+            if (heroOutOfView && !checkoutInView) {
+                stickyCta.classList.remove('translate-y-full');
+            } else {
+                stickyCta.classList.add('translate-y-full');
+            }
         };
 
-        const stickyObserver = new IntersectionObserver(stickyCallback, {
-            threshold: 0
+        const stickyObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.target === heroSection) {
+                    heroOutOfView = !entry.isIntersecting;
+                }
+
+                if (entry.target === checkoutSection) {
+                    checkoutInView = entry.isIntersecting;
+                }
+            });
+
+            updateStickyCtaVisibility();
+        }, {
+            threshold: 0.15
         });
 
         if (heroSection && stickyCta) {
             stickyObserver.observe(heroSection);
+        }
+
+        if (checkoutSection && stickyCta) {
+            stickyObserver.observe(checkoutSection);
         }
         
         // FAQ Accordion custom behavior (prevent multiple open at once - optional)
@@ -464,7 +484,6 @@
         });
 
         // Smooth scroll CTAs to inline checkout
-        const checkoutSection = document.getElementById('checkout');
         document.querySelectorAll('.js-scroll-to-checkout').forEach((el) => {
             el.addEventListener('click', (e) => {
                 e.preventDefault();
