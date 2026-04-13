@@ -365,7 +365,7 @@
                 <button
                     id="checkout-option-1"
                     type="button"
-                    class="checkout-option-btn rounded-xl border border-border bg-surface-alt/40 px-4 py-3 text-sm font-medium text-text transition-colors duration-75 hover:border-cta/30 hover:bg-surface-alt focus:outline-none focus:ring-2 focus:ring-cta/30"
+                    class="checkout-option-btn rounded-xl border border-border bg-surface-alt/40 px-4 py-3 text-sm font-medium text-text transition-none hover:border-cta/30 hover:bg-surface-alt focus:outline-none focus:ring-2 focus:ring-cta/30"
                     data-checkout-url="https://buy.polar.sh/polar_cl_Ob2MEwUQKkheQfh6FFPH5dkWKBojWvbaKS6wy1UaY9T"
                     aria-pressed="false"
                 >
@@ -374,7 +374,7 @@
                 <button
                     id="checkout-option-2"
                     type="button"
-                    class="checkout-option-btn rounded-xl border border-border bg-surface-alt/40 px-4 py-3 text-sm font-medium text-text transition-colors duration-75 hover:border-cta/30 hover:bg-surface-alt focus:outline-none focus:ring-2 focus:ring-cta/30"
+                    class="checkout-option-btn rounded-xl border border-border bg-surface-alt/40 px-4 py-3 text-sm font-medium text-text transition-none hover:border-cta/30 hover:bg-surface-alt focus:outline-none focus:ring-2 focus:ring-cta/30"
                     data-checkout-url="https://buy.polar.sh/polar_cl_ijRW6aiRUI7A7HzuZwJqgHRRnIvEd8b3T7x9G1eau71"
                     aria-pressed="false"
                 >
@@ -404,7 +404,7 @@
                 id="polar-checkout-iframe"
                 src="about:blank"
                 title="Polar Checkout"
-                class="hidden min-h-[1200px] w-full bg-white md:min-h-[1320px]"
+                class="hidden h-[1760px] w-full bg-white md:h-[1400px]"
                 loading="eager"
                 referrerpolicy="strict-origin-when-cross-origin"
             ></iframe>
@@ -549,6 +549,10 @@
             };
 
             checkoutOptionButtons.forEach((button) => {
+                button.addEventListener('pointerdown', () => {
+                    setActiveOption(button);
+                });
+
                 button.addEventListener('click', () => {
                     const selectedUrl = button.dataset.checkoutUrl;
                     if (!selectedUrl) {
@@ -566,19 +570,6 @@
             polarIframe.addEventListener('load', () => {
                 checkoutLoading.classList.add('hidden');
                 polarIframe.classList.remove('hidden');
-            });
-
-            // Polar can optionally send iframe height updates; fallback min-height remains in place.
-            window.addEventListener('message', (event) => {
-                if (!event.origin.includes('polar.sh')) {
-                    return;
-                }
-
-                const eventData = event.data || {};
-                const possibleHeight = Number(eventData?.height || eventData?.frameHeight || eventData?.checkoutHeight);
-                if (Number.isFinite(possibleHeight) && possibleHeight > 0) {
-                    polarIframe.style.height = `${Math.ceil(possibleHeight)}px`;
-                }
             });
         }
     </script>
