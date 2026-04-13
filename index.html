@@ -354,7 +354,7 @@
             Personal, emotionally right, and incredibly easy to send. Make her first Mother's Day unforgettable in just a few minutes.
         </p>
 
-        <div class="mx-auto mb-4 max-w-3xl rounded-2xl border border-border bg-surface-alt px-5 py-4 text-left">
+        <div id="checkout-intro-note" class="mx-auto mb-4 max-w-3xl rounded-2xl border border-border bg-surface-alt px-5 py-4 text-left scroll-mt-6 md:scroll-mt-8">
             <p class="text-sm text-muted leading-relaxed">
                 After checkout, you’ll complete a short personalization form. Once submitted, your private digital flipbook will generate instantly and also email the form in case you miss it
             </p>
@@ -365,7 +365,7 @@
                 <button
                     id="checkout-option-1"
                     type="button"
-                    class="checkout-option-btn rounded-xl border border-border bg-surface-alt/40 px-4 py-3 text-sm font-medium text-text transition-all hover:border-cta/30 hover:bg-surface-alt focus:outline-none focus:ring-2 focus:ring-cta/30"
+                    class="checkout-option-btn rounded-xl border border-border bg-surface-alt/40 px-4 py-3 text-sm font-medium text-text transition-colors duration-75 hover:border-cta/30 hover:bg-surface-alt focus:outline-none focus:ring-2 focus:ring-cta/30"
                     data-checkout-url="https://buy.polar.sh/polar_cl_Ob2MEwUQKkheQfh6FFPH5dkWKBojWvbaKS6wy1UaY9T"
                     aria-pressed="false"
                 >
@@ -374,7 +374,7 @@
                 <button
                     id="checkout-option-2"
                     type="button"
-                    class="checkout-option-btn rounded-xl border border-border bg-surface-alt/40 px-4 py-3 text-sm font-medium text-text transition-all hover:border-cta/30 hover:bg-surface-alt focus:outline-none focus:ring-2 focus:ring-cta/30"
+                    class="checkout-option-btn rounded-xl border border-border bg-surface-alt/40 px-4 py-3 text-sm font-medium text-text transition-colors duration-75 hover:border-cta/30 hover:bg-surface-alt focus:outline-none focus:ring-2 focus:ring-cta/30"
                     data-checkout-url="https://buy.polar.sh/polar_cl_ijRW6aiRUI7A7HzuZwJqgHRRnIvEd8b3T7x9G1eau71"
                     aria-pressed="false"
                 >
@@ -404,7 +404,7 @@
                 id="polar-checkout-iframe"
                 src="about:blank"
                 title="Polar Checkout"
-                class="hidden h-[860px] w-full bg-white"
+                class="hidden min-h-[1200px] w-full bg-white md:min-h-[1320px]"
                 loading="eager"
                 referrerpolicy="strict-origin-when-cross-origin"
             ></iframe>
@@ -459,6 +459,7 @@
         const stickyCta = document.getElementById('sticky-cta');
         const heroSection = document.getElementById('hero-content');
         const checkoutSection = document.getElementById('checkout');
+        const checkoutIntroNote = document.getElementById('checkout-intro-note');
         let heroOutOfView = false;
         let checkoutInView = false;
 
@@ -514,7 +515,14 @@
         document.querySelectorAll('.js-scroll-to-checkout').forEach((el) => {
             el.addEventListener('click', (e) => {
                 e.preventDefault();
-                checkoutSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const scrollTarget = checkoutIntroNote || checkoutSection;
+                if (!scrollTarget) {
+                    return;
+                }
+
+                const topOffset = window.innerWidth < 768 ? 20 : 16;
+                const targetTop = scrollTarget.getBoundingClientRect().top + window.scrollY - topOffset;
+                window.scrollTo({ top: targetTop, behavior: 'smooth' });
             });
         });
 
@@ -558,6 +566,19 @@
             polarIframe.addEventListener('load', () => {
                 checkoutLoading.classList.add('hidden');
                 polarIframe.classList.remove('hidden');
+            });
+
+            // Polar can optionally send iframe height updates; fallback min-height remains in place.
+            window.addEventListener('message', (event) => {
+                if (!event.origin.includes('polar.sh')) {
+                    return;
+                }
+
+                const eventData = event.data || {};
+                const possibleHeight = Number(eventData?.height || eventData?.frameHeight || eventData?.checkoutHeight);
+                if (Number.isFinite(possibleHeight) && possibleHeight > 0) {
+                    polarIframe.style.height = `${Math.ceil(possibleHeight)}px`;
+                }
             });
         }
     </script>
